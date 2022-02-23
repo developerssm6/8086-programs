@@ -1,0 +1,145 @@
+
+
+1.	Program to find sum of digit of an 8 bit number
+
+MOV AL, [0150]
+MOV AH, AL
+MOV CX, 0004
+AND AL, 0F
+ROL AH, CX
+AND AH, 0F
+ADD AL, AH
+MOV [0151], AL
+HLT
+
+2.	Program for calculating the factorial of a number.
+
+MOV CX, [0150]
+MOV AX, 0001
+MOV DX, 0000
+L: MUL CX
+LOOP L
+MOV [0160], AX
+MOV [0161], DX
+HLT
+
+
+3.	Program to find square root of 8 bit number.
+
+MOV AX, [0150]
+MOV CX, 0000
+MOV BX, FFFF
+L: ADD BX, 02
+INC CX
+SUB AX, BX
+JNZ L
+MOV [0160], CX
+HLT
+
+
+
+4.	Program to Find Smallest/Largest of Two 8-bit Numbers
+
+MOV AL, [0150]
+MOV BL, [0151]
+CMP AL, BL
+JC L (or) JNC L; use address in debug
+MOV AL,BL
+L: MOV [0152], AL
+HLT
+
+
+5.	Program to Find Smallest from an Array
+
+MOV SI, 0150
+MOV DI, 0160
+MOV CL, [SI]
+MOV CH, 00
+INC SI
+MOV AL, [SI]
+DEC CX
+L1: INC SI
+MOV BL, [SI]
+CMP AL, BL
+JC L2
+MOV AL, BL
+L2: LOOP L1
+MOV [DI], AL
+HLT
+
+
+6.	Program to Calculate the sum of series of even numbers
+
+MOV SI, 0150
+MOV CL, [SI]
+INC SI
+MOV CH, 00
+MOV AL, 00
+L1: MOV BL, [SI]
+TEST BL, 01
+JNZ L2
+ADD AL, BL
+L2: INC SI
+LOOP L1
+MOV [0160], AL
+HLT
+
+7.	Program to Calculate the sum of series of odd numbers
+
+MOV SI, 0150
+MOV CL, [SI]
+INC SI
+MOV CH, 00
+MOV AL, 00
+L1: MOV BL, [SI]
+TEST BL, 01
+JZ L2
+ADD AL, BL
+L2: INC SI
+LOOP L1
+MOV [0160], AL
+HLT
+
+8.	Program to Generate Fibonacci Series
+
+MOV AL, 00H
+MOV SI, 0150H
+MOV [SI], AL
+ADD SI, 01H
+ADD AL, 01H
+MOV [SI], AL
+MOV CX, [0000H]
+SUB CX, 0002H
+L1:	MOV AL, [SI-1]
+ADD AL, [SI]
+ADD SI, 01H
+MOV [SI], AL
+LOOP L1
+HLT
+
+
+9. Program to multiply two 8 bit numbers
+
+MOV SI, 0150
+MOV DI, 0160
+MOV AL, [SI]
+INC SI
+MOV BL, [SI]
+MUL BL
+MOV [DI], AX
+HLT
+
+10. program to determine sum of corresponding elements of two arrays
+
+MOV SI, 0150
+MOV CL, [SI]
+MOV CH, 00
+INC SI
+MOV DI, 0160
+L1: MOV AL, [SI]
+ADD AL, [DI]
+MOV [SI], AL
+INC SI
+INC DI
+LOOP L1
+HLT
